@@ -1,0 +1,7 @@
+{
+  "extends": "ts-config-lfca/nextjs",
+  "compilerOptions": {
+    "declaration": true,
+    "noEmit": false
+  }
+}
