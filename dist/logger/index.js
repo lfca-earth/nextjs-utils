@@ -5,7 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createLogger = exports.rootLogger = void 0;
 const loglevel_1 = __importDefault(require("loglevel"));
+const loglevel_plugin_prefix_1 = __importDefault(require("loglevel-plugin-prefix"));
 const node_env_1 = require("../node-env");
+loglevel_plugin_prefix_1.default.reg(loglevel_1.default);
+loglevel_plugin_prefix_1.default.apply(loglevel_1.default, {
+    format(level, name) {
+        return `[${level}] ${name}:`;
+    },
+});
 if ((0, node_env_1.isProduction)()) {
     loglevel_1.default.setDefaultLevel(loglevel_1.default.levels.WARN);
 }

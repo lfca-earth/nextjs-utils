@@ -28,7 +28,7 @@ const validatedApiHandler = (callback, { authenticated, bodySchema, method, quer
     // Validate authorization
     if (authenticated) {
         const token = (_a = (0, helpers_1.getHeader)(req, 'authorization')) === null || _a === void 0 ? void 0 : _a.split('Bearer ')[1];
-        if (token !== process.env.AUTH_TOKEN) {
+        if (token !== process.env.API_AUTH_TOKEN) {
             logger.error(types_1.ValidationError.UNAUTHORIZED);
             return (0, helpers_1.createJsonResponse)(res, {
                 json: { message: types_1.ValidationError.UNAUTHORIZED },
