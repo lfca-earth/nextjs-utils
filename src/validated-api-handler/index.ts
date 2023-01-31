@@ -50,7 +50,7 @@ export const validatedApiHandler =
     // Validate authorization
     if (authenticated) {
       const token = getHeader(req, 'authorization')?.split('Bearer ')[1]
-      if (token !== process.env.AUTH_TOKEN) {
+      if (token !== process.env.API_AUTH_TOKEN) {
         logger.error(ValidationError.UNAUTHORIZED)
         return createJsonResponse(res, {
           json: { message: ValidationError.UNAUTHORIZED },
