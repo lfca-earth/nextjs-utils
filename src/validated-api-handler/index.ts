@@ -7,16 +7,18 @@ import {
   RequestTypes,
   ResponseTypes,
   ReturnTypes,
-  Test,
-  ValidatedRequestTypes,
   ValidationError,
 } from './types'
 
 export const validatedApiHandler =
-  <R extends keyof Test, BT, BS, QT, QS>(
+  <R extends keyof RequestTypes, BT, BS, QT, QS>(
     callback: (
-      req: ValidatedRequestTypes<BT, QT>[R],
+      req: RequestTypes[R],
       res: ResponseTypes[R],
+      parsed: {
+        body: BT | undefined
+        query: QT | undefined
+      },
       logger: Logger
     ) => Promise<ReturnTypes[R]> | ReturnTypes[R],
     {
@@ -72,8 +74,12 @@ export const validatedApiHandler =
       }
 
       return callback(
-        { ...req, parsedBody, parsedQuery } as ValidatedRequestTypes<BT, QT>[R],
+        req,
         res,
+        {
+          body: parsedBody,
+          query: parsedQuery as QT,
+        },
         logger
       )
     } catch (e) {
