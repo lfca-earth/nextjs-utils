@@ -16,8 +16,8 @@ export const validatedApiHandler =
       req: RequestTypes[R],
       res: ResponseTypes[R],
       parsed: {
-        body: BT | undefined
-        query: QT | undefined
+        body: BT
+        query: QT
       },
       logger: Logger
     ) => Promise<ReturnTypes[R]> | ReturnTypes[R],
