@@ -1,6 +1,15 @@
 import loglevel from 'loglevel'
+import prefix from 'loglevel-plugin-prefix'
 
 import { isDev, isProduction, isTest } from '../node-env'
+
+prefix.reg(loglevel)
+
+prefix.apply(loglevel, {
+  format(level, name) {
+    return `[${level}] ${name}:`
+  },
+})
 
 if (isProduction()) {
   loglevel.setDefaultLevel(loglevel.levels.WARN)
