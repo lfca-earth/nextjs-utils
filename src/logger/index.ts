@@ -14,4 +14,6 @@ if (isProduction()) {
 
 export const rootLogger = loglevel
 
+export type Logger = loglevel.Logger
+
 export const createLogger = loglevel.getLogger

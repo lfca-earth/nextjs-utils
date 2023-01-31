@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { assert, Struct } from 'superstruct'
 
-import { createLogger } from '../logger'
+import { createLogger, Logger } from '../logger'
 import { createJsonResponse, getHeader, getJsonBody, getQuery } from './helpers'
 import {
   RequestTypes,
@@ -16,7 +16,8 @@ export const validatedApiHandler =
   <R extends keyof Test, BT, BS, QT, QS>(
     callback: (
       req: ValidatedRequestTypes<BT, QT>[R],
-      res: ResponseTypes[R]
+      res: ResponseTypes[R],
+      logger: Logger
     ) => Promise<ReturnTypes[R]> | ReturnTypes[R],
     {
       authenticated,
@@ -72,7 +73,8 @@ export const validatedApiHandler =
 
       return callback(
         { ...req, parsedBody, parsedQuery } as ValidatedRequestTypes<BT, QT>[R],
-        res
+        res,
+        logger
       )
     } catch (e) {
       logger.error(`Invalid input: ${JSON.stringify(req.body || {})}`, e)
