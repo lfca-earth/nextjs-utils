@@ -46,7 +46,10 @@ const validatedApiHandler = (callback, { authenticated, bodySchema, method, quer
         if (querySchema) {
             (0, superstruct_1.assert)(parsedQuery, querySchema);
         }
-        return callback(Object.assign(Object.assign({}, req), { parsedBody, parsedQuery }), res, logger);
+        return callback(req, res, {
+            body: parsedBody,
+            query: parsedQuery,
+        }, logger);
     }
     catch (e) {
         logger.error(`Invalid input: ${JSON.stringify(req.body || {})}`, e);

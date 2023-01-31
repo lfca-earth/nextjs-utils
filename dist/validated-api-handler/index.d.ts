@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
 import { Struct } from 'superstruct';
 import { Logger } from '../logger';
-import { RequestTypes, ResponseTypes, ReturnTypes, Test, ValidatedRequestTypes } from './types';
-export declare const validatedApiHandler: <R extends keyof Test, BT, BS, QT, QS>(callback: (req: ValidatedRequestTypes<BT, QT>[R], res: ResponseTypes[R], logger: Logger) => ReturnTypes[R] | Promise<ReturnTypes[R]>, { authenticated, bodySchema, method, querySchema, }: {
+import { RequestTypes, ResponseTypes, ReturnTypes } from './types';
+export declare const validatedApiHandler: <R extends keyof RequestTypes, BT, BS, QT, QS>(callback: (req: RequestTypes[R], res: ResponseTypes[R], parsed: {
+    body: BT | undefined;
+    query: QT | undefined;
+}, logger: Logger) => ReturnTypes[R] | Promise<ReturnTypes[R]>, { authenticated, bodySchema, method, querySchema, }: {
     authenticated: boolean;
     bodySchema?: Struct<BT, BS | null> | undefined;
     method: string;

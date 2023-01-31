@@ -1,11 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidationError = exports.Runtime = void 0;
-var Runtime;
-(function (Runtime) {
-    Runtime["edge"] = "edge";
-    Runtime["nodejs"] = "nodejs";
-})(Runtime = exports.Runtime || (exports.Runtime = {}));
+exports.ValidationError = void 0;
 var ValidationError;
 (function (ValidationError) {
     ValidationError["BAD_REQUEST"] = "Payload invalid";
