@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-utils",
+  "name": "@lfca/nextjs-utils",
   "private": true,
   "repository": "git@github.com:lfca-earth/nextjs-utils.git",
   "version": "1.0.0",
