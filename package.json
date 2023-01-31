@@ -25,7 +25,7 @@
     "prettier": "2.8.3",
     "prettier-config-lfca": "lfca-earth/prettier-config-lfca#7908d2e",
     "react": "18.2.0",
-    "ts-config-lfca": "lfca-earth/ts-config-lfca#babd407",
+    "ts-config-lfca": "lfca-earth/ts-config-lfca#c5fcc8d",
     "typescript": "4.9.4"
   }
 }

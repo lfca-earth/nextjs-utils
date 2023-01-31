@@ -134,6 +134,21 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tsconfig/next@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@tsconfig/next/-/next-1.0.5.tgz#045d4d95839829e31d928404ab43a3c5b5169ee7"
+  integrity sha512-ZpAlWqSGE3ZWFqKmI3FiQEu8WcBF3uii1z1ovedMcALflsRoJnExp3YzWQ/fU7lzGmYtfX1CWFpf1Gl8aEC6GQ==
+
+"@tsconfig/node16@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.3.tgz#472eaab5f15c1ffdd7f8628bd4c4f753995ec79e"
+  integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
+
+"@tsconfig/recommended@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@tsconfig/recommended/-/recommended-1.0.2.tgz#1e198237225933e319718f082e78366e9f159d71"
+  integrity sha512-dbHBtbWBOjq0/otpopAE02NT2Cm05Qe2JsEKeCf/wjSYbI2hz8nCqnpnOJWHATgjDz4fd3dchs3Wy1gQGjfN6w==
+
 "@types/json-schema@^7.0.9":
   version "7.0.11"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
@@ -1089,9 +1104,13 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-ts-config-lfca@lfca-earth/ts-config-lfca#babd407:
+ts-config-lfca@lfca-earth/ts-config-lfca#c5fcc8d:
   version "1.0.0"
-  resolved "git+ssh://git@github.com/lfca-earth/ts-config-lfca.git#babd407ec54853be819519dd4387cf9945f2b7ee"
+  resolved "git+ssh://git@github.com/lfca-earth/ts-config-lfca.git#c5fcc8dbce9dccece1a4fc99012201892754fb41"
+  dependencies:
+    "@tsconfig/next" "1.0.5"
+    "@tsconfig/node16" "1.0.3"
+    "@tsconfig/recommended" "1.0.2"
 
 tslib@^1.8.1:
   version "1.14.1"
