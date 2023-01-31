@@ -18,15 +18,15 @@
     "next": ">= 13"
   },
   "devDependencies": {
+    "@lfca/eslint-config-lfca": "git+https://git@github.com/lfca-earth/eslint-config-lfca.git#423c245",
+    "@lfca/prettier-config": "git+https://git@github.com/lfca-earth/prettier-config-lfca.git#7908d2e",
+    "@lfca/ts-config": "git+https://git@github.com/lfca-earth/ts-config-lfca.git#c5fcc8d",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "eslint": "8.33.0",
-    "eslint-config-lfca": "lfca-earth/eslint-config-lfca#423c245",
     "next": "13.1.6",
     "prettier": "2.8.3",
-    "prettier-config-lfca": "lfca-earth/prettier-config-lfca#7908d2e",
     "react": "18.2.0",
-    "ts-config-lfca": "lfca-earth/ts-config-lfca#c5fcc8d",
     "typescript": "4.9.4"
   }
 }
