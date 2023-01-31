@@ -1,11 +1,15 @@
-export var Runtime;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValidationError = exports.Runtime = void 0;
+var Runtime;
 (function (Runtime) {
     Runtime["edge"] = "edge";
     Runtime["nodejs"] = "nodejs";
-})(Runtime || (Runtime = {}));
-export var ValidationError;
+})(Runtime = exports.Runtime || (exports.Runtime = {}));
+var ValidationError;
 (function (ValidationError) {
     ValidationError["BAD_REQUEST"] = "Payload invalid";
     ValidationError["NOT_FOUND"] = "Not found";
     ValidationError["UNAUTHORIZED"] = "Unauthorized";
-})(ValidationError || (ValidationError = {}));
+})(ValidationError = exports.ValidationError || (exports.ValidationError = {}));
+//# sourceMappingURL=types.js.map
