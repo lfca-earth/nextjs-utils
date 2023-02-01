@@ -49,7 +49,7 @@ export const validatedApiHandler =
     const logger = createLogger(req.url || 'unknown/path')
 
     // Enable CORS if requested
-    if (enableCors && req.method === 'OPTIONS') {
+    if (req.method === 'OPTIONS' && enableCors) {
       return createCorsResponse(req, res)
     }
 
