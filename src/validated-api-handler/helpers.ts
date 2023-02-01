@@ -27,7 +27,6 @@ export function createJsonResponse(
 }
 
 export function getHeader(req: NextApiRequest | NextRequest, name: string) {
-  console.log('req.headers', req.headers)
   const value = isEdgeRequest(req)
     ? req.headers.get(name)
     : req.headers[name.toLocaleLowerCase()]

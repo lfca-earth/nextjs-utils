@@ -25,7 +25,6 @@ function createJsonResponse(res, { json, status, }) {
 }
 exports.createJsonResponse = createJsonResponse;
 function getHeader(req, name) {
-    console.log('req.headers', req.headers);
     const value = isEdgeRequest(req)
         ? req.headers.get(name)
         : req.headers[name.toLocaleLowerCase()];
