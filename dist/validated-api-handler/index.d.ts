@@ -12,4 +12,4 @@ export declare const validatedApiHandler: <R extends keyof RequestTypes, BT, BS,
     method: string;
     querySchema?: Struct<QT, QS | null> | undefined;
     runtime: R;
-}) => (req: RequestTypes[R], res: ResponseTypes[R]) => Promise<NextResponse | void>;
+}) => (req: RequestTypes[R], res: ResponseTypes[R]) => Promise<NextResponse | Response | void>;

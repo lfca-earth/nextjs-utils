@@ -8,25 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validatedApiHandler = void 0;
 const superstruct_1 = require("superstruct");
-const cors_1 = __importDefault(require("cors"));
 const logger_1 = require("../logger");
 const helpers_1 = require("./helpers");
 const types_1 = require("./types");
-const cors = (0, cors_1.default)({
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-});
 const validatedApiHandler = (callback, { authenticated, bodySchema, enableCors, method, querySchema, }) => (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const logger = (0, logger_1.createLogger)(req.url || 'unknown/path');
     // Enable CORS if requested
-    if (enableCors) {
-        yield (0, helpers_1.runMiddleware)(req, res, cors);
+    if (enableCors && req.method === 'OPTIONS') {
+        return (0, helpers_1.createCorsResponse)(req, res);
     }
     // Validate method
     if (req.method !== method) {

@@ -45,18 +45,26 @@ export function getQuery(req: NextApiRequest | NextRequest) {
   }
 }
 
-export function runMiddleware(
+export function createCorsResponse(
   req: NextApiRequest | NextRequest,
-  res: NextApiResponse | NextResponse,
-  fn: Function
+  res: NextApiResponse | NextResponse
 ) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result: any) => {
-      if (result instanceof Error) {
-        return reject(result)
-      }
+  const origin = '*'
+  const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE'
 
-      return resolve(result)
-    })
-  })
+  if (isEdgeRequest(req)) {
+    const headers = new Headers()
+
+    // Allow any origin
+    headers.set('Access-Control-Allow-Origin', origin)
+    headers.set('Access-Control-Allow-Methods', methods)
+
+    return new Response(null, { status: 204, headers })
+  } else {
+    return (res as NextApiResponse)
+      .status(204)
+      .setHeader('Access-Control-Allow-Origin', origin)
+      .setHeader('Access-Control-Allow-Methods', methods)
+      .send(null)
+  }
 }

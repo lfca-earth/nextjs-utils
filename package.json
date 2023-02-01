@@ -10,7 +10,6 @@
     "lint": "eslint . --ext .ts --max-warnings=0"
   },
   "dependencies": {
-    "cors": "2.8.5",
     "loglevel": "1.8.1",
     "loglevel-plugin-prefix": "0.8.4",
     "superstruct": "1.0.3"
@@ -22,7 +21,6 @@
     "@lfca/eslint-config-lfca": "git+https://git@github.com/lfca-earth/eslint-config-lfca.git#423c245",
     "@lfca/prettier-config": "git+https://git@github.com/lfca-earth/prettier-config-lfca.git#7908d2e",
     "@lfca/ts-config": "git+https://git@github.com/lfca-earth/ts-config-lfca.git#c5fcc8d",
-    "@types/cors": "2.8.13",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "eslint": "8.33.0",

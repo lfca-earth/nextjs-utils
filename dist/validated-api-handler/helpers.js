@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runMiddleware = exports.getQuery = exports.getJsonBody = exports.getHeader = exports.createJsonResponse = exports.isEdgeRequest = void 0;
+exports.createCorsResponse = exports.getQuery = exports.getJsonBody = exports.getHeader = exports.createJsonResponse = exports.isEdgeRequest = void 0;
 const server_1 = require("next/server");
 function isEdgeRequest(req) {
     return !('query' in req);
@@ -45,15 +45,23 @@ function getQuery(req) {
     }
 }
 exports.getQuery = getQuery;
-function runMiddleware(req, res, fn) {
-    return new Promise((resolve, reject) => {
-        fn(req, res, (result) => {
-            if (result instanceof Error) {
-                return reject(result);
-            }
-            return resolve(result);
-        });
-    });
+function createCorsResponse(req, res) {
+    const origin = '*';
+    const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+    if (isEdgeRequest(req)) {
+        const headers = new Headers();
+        // Allow any origin
+        headers.set('Access-Control-Allow-Origin', origin);
+        headers.set('Access-Control-Allow-Methods', methods);
+        return new Response(null, { status: 204, headers });
+    }
+    else {
+        return res
+            .status(204)
+            .setHeader('Access-Control-Allow-Origin', origin)
+            .setHeader('Access-Control-Allow-Methods', methods)
+            .send(null);
+    }
 }
-exports.runMiddleware = runMiddleware;
+exports.createCorsResponse = createCorsResponse;
 //# sourceMappingURL=helpers.js.map
