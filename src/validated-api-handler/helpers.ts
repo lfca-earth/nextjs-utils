@@ -53,6 +53,7 @@ export function createCorsResponse(
   const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE'
 
   if (isEdgeRequest(req)) {
+    console.log('edge request')
     const headers = new Headers()
 
     // Allow any origin

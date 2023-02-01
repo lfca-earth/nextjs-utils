@@ -17,6 +17,7 @@ const types_1 = require("./types");
 const validatedApiHandler = (callback, { authenticated, bodySchema, enableCors, method, querySchema, }) => (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const logger = (0, logger_1.createLogger)(req.url || 'unknown/path');
+    console.info('method', req.method);
     // Enable CORS if requested
     if (req.method === 'OPTIONS' && enableCors) {
         return (0, helpers_1.createCorsResponse)(req, res);

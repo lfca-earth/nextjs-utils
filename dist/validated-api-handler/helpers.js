@@ -49,6 +49,7 @@ function createCorsResponse(req, res) {
     const origin = '*';
     const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
     if (isEdgeRequest(req)) {
+        console.log('edge request');
         const headers = new Headers();
         // Allow any origin
         headers.set('Access-Control-Allow-Origin', origin);

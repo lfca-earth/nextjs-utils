@@ -48,6 +48,7 @@ export const validatedApiHandler =
   ): Promise<NextResponse | Response | void> => {
     const logger = createLogger(req.url || 'unknown/path')
 
+    console.info('method', req.method)
     // Enable CORS if requested
     if (req.method === 'OPTIONS' && enableCors) {
       return createCorsResponse(req, res)
