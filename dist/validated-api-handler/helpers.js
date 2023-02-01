@@ -25,7 +25,10 @@ function createJsonResponse(res, { json, status, }) {
 }
 exports.createJsonResponse = createJsonResponse;
 function getHeader(req, name) {
-    const value = isEdgeRequest(req) ? req.headers.get(name) : req.headers[name];
+    console.log('req.headers', req.headers);
+    const value = isEdgeRequest(req)
+        ? req.headers.get(name)
+        : req.headers[name.toLocaleLowerCase()];
     return typeof value === 'string' ? value : undefined;
 }
 exports.getHeader = getHeader;
@@ -46,7 +49,8 @@ function getQuery(req) {
 }
 exports.getQuery = getQuery;
 function createCorsResponse(req, res) {
-    const origin = '*';
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const origin = getHeader(req, 'Origin');
     const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const header = getHeader(req, 'Access-Control-Request-Headers');
