@@ -18,7 +18,7 @@ const validatedApiHandler = (callback, { authenticated, bodySchema, enableCors, 
     var _a;
     const logger = (0, logger_1.createLogger)(req.url || 'unknown/path');
     // Enable CORS if requested
-    if (enableCors && req.method === 'OPTIONS') {
+    if (req.method === 'OPTIONS' && enableCors) {
         return (0, helpers_1.createCorsResponse)(req, res);
     }
     // Validate method
