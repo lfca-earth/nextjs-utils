@@ -1,5 +1,5 @@
 {
-  "extends": "ts-config-lfca/npm-module",
+  "extends": "@lfca/ts-config/npm-module",
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./dist",
