@@ -1,13 +1,15 @@
+import { NextApiResponse } from 'next'
 import { NextResponse } from 'next/server'
 import { assert, Struct } from 'superstruct'
 
 import { createLogger, Logger } from '../logger'
 import {
-  createCorsResponse,
   createJsonResponse,
+  createSetCorsHeaders,
   getHeader,
   getJsonBody,
   getQuery,
+  isEdgeRequest,
 } from './helpers'
 import {
   RequestTypes,
@@ -21,11 +23,12 @@ export const validatedApiHandler =
     callback: (
       req: RequestTypes[R],
       res: ResponseTypes[R],
+      logger: Logger,
       parsed: {
         body: BT
         query: QT
       },
-      logger: Logger
+      edgeCorsHeaders?: Headers
     ) => Promise<ReturnTypes[R]> | ReturnTypes[R],
     {
       authenticated,
@@ -48,9 +51,15 @@ export const validatedApiHandler =
   ): Promise<NextResponse | Response | void> => {
     const logger = createLogger(req.url || 'unknown/path')
 
-    // Enable CORS if requested
+    // Handle CORS if requested
+    const corsHeaders = enableCors ? createSetCorsHeaders(req, res) : undefined
+    // Respond to OPTIONS call directly
     if (req.method === 'OPTIONS' && enableCors) {
-      return createCorsResponse(req, res)
+      if (isEdgeRequest(req)) {
+        return new Response(null, { headers: corsHeaders, status: 204 })
+      } else {
+        return (res as NextApiResponse).status(204).send(undefined)
+      }
     }
 
     // Validate method
@@ -89,11 +98,12 @@ export const validatedApiHandler =
       return callback(
         req,
         res,
+        logger,
         {
           body: parsedBody,
           query: parsedQuery as QT,
         },
-        logger
+        corsHeaders
       )
     } catch (e) {
       logger.error(`Invalid input: ${JSON.stringify(req.body || {})}`, e)

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createCorsResponse = exports.getQuery = exports.getJsonBody = exports.getHeader = exports.createJsonResponse = exports.isEdgeRequest = void 0;
+exports.createSetCorsHeaders = exports.getQuery = exports.getJsonBody = exports.getHeader = exports.createJsonResponse = exports.isEdgeRequest = void 0;
 const server_1 = require("next/server");
 function isEdgeRequest(req) {
     return !('query' in req);
@@ -47,7 +47,7 @@ function getQuery(req) {
     }
 }
 exports.getQuery = getQuery;
-function createCorsResponse(req, res) {
+function createSetCorsHeaders(req, res) {
     const origin = getHeader(req, 'Origin') || '*';
     const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
     const header = getHeader(req, 'Access-Control-Request-Headers') || 'Content-Type';
@@ -57,16 +57,15 @@ function createCorsResponse(req, res) {
         headers.set('Access-Control-Allow-Origin', origin);
         headers.set('Access-Control-Allow-Methods', methods);
         headers.set('Access-Control-Allow-Headers', header);
-        return new Response(null, { headers, status: 204 });
+        return headers;
     }
     else {
-        return res
-            .status(204)
+        const apiResponse = res;
+        apiResponse
             .setHeader('Access-Control-Allow-Origin', origin)
             .setHeader('Access-Control-Allow-Methods', methods)
-            .setHeader('Access-Control-Allow-Headers', header)
-            .send(null);
+            .setHeader('Access-Control-Allow-Headers', header);
     }
 }
-exports.createCorsResponse = createCorsResponse;
+exports.createSetCorsHeaders = createSetCorsHeaders;
 //# sourceMappingURL=helpers.js.map

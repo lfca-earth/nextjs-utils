@@ -17,9 +17,16 @@ const types_1 = require("./types");
 const validatedApiHandler = (callback, { authenticated, bodySchema, enableCors, method, querySchema, }) => (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const logger = (0, logger_1.createLogger)(req.url || 'unknown/path');
-    // Enable CORS if requested
+    // Handle CORS if requested
+    const corsHeaders = enableCors ? (0, helpers_1.createSetCorsHeaders)(req, res) : undefined;
+    // Respond to OPTIONS call directly
     if (req.method === 'OPTIONS' && enableCors) {
-        return (0, helpers_1.createCorsResponse)(req, res);
+        if ((0, helpers_1.isEdgeRequest)(req)) {
+            return new Response(null, { headers: corsHeaders, status: 204 });
+        }
+        else {
+            return res.status(204).send(undefined);
+        }
     }
     // Validate method
     if (req.method !== method) {
@@ -50,10 +57,10 @@ const validatedApiHandler = (callback, { authenticated, bodySchema, enableCors, 
         if (querySchema) {
             (0, superstruct_1.assert)(parsedQuery, querySchema);
         }
-        return callback(req, res, {
+        return callback(req, res, logger, {
             body: parsedBody,
             query: parsedQuery,
-        }, logger);
+        }, corsHeaders);
     }
     catch (e) {
         logger.error(`Invalid input: ${JSON.stringify(req.body || {})}`, e);

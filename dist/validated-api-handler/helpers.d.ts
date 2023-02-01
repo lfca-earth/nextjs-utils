@@ -10,4 +10,4 @@ export declare function getJsonBody(req: NextApiRequest | NextRequest): Promise<
 export declare function getQuery(req: NextApiRequest | NextRequest): Partial<{
     [key: string]: string | string[];
 }>;
-export declare function createCorsResponse(req: NextApiRequest | NextRequest, res: NextApiResponse | NextResponse): void | Response;
+export declare function createSetCorsHeaders(req: NextApiRequest | NextRequest, res: NextApiResponse | NextResponse): Headers | undefined;

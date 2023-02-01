@@ -47,7 +47,7 @@ export function getQuery(req: NextApiRequest | NextRequest) {
   }
 }
 
-export function createCorsResponse(
+export function createSetCorsHeaders(
   req: NextApiRequest | NextRequest,
   res: NextApiResponse | NextResponse
 ) {
@@ -64,13 +64,12 @@ export function createCorsResponse(
     headers.set('Access-Control-Allow-Methods', methods)
     headers.set('Access-Control-Allow-Headers', header)
 
-    return new Response(null, { headers, status: 204 })
+    return headers
   } else {
-    return (res as NextApiResponse)
-      .status(204)
+    const apiResponse = res as NextApiResponse
+    apiResponse
       .setHeader('Access-Control-Allow-Origin', origin)
       .setHeader('Access-Control-Allow-Methods', methods)
       .setHeader('Access-Control-Allow-Headers', header)
-      .send(null)
   }
 }
