@@ -1,14 +1,25 @@
 import { NextResponse } from 'next/server'
 import { assert, Struct } from 'superstruct'
+import Cors from 'cors'
 
 import { createLogger, Logger } from '../logger'
-import { createJsonResponse, getHeader, getJsonBody, getQuery } from './helpers'
+import {
+  createJsonResponse,
+  getHeader,
+  getJsonBody,
+  getQuery,
+  runMiddleware,
+} from './helpers'
 import {
   RequestTypes,
   ResponseTypes,
   ReturnTypes,
   ValidationError,
 } from './types'
+
+const cors = Cors({
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+})
 
 export const validatedApiHandler =
   <R extends keyof RequestTypes, BT, BS, QT, QS>(
@@ -24,11 +35,13 @@ export const validatedApiHandler =
     {
       authenticated,
       bodySchema,
+      enableCors,
       method,
       querySchema,
     }: {
       authenticated: boolean
       bodySchema?: Struct<BT, BS | null>
+      enableCors?: boolean
       method: string
       querySchema?: Struct<QT, QS | null>
       runtime: R
@@ -39,6 +52,11 @@ export const validatedApiHandler =
     res: ResponseTypes[R]
   ): Promise<NextResponse | void> => {
     const logger = createLogger(req.url || 'unknown/path')
+
+    // Enable CORS if requested
+    if (enableCors) {
+      await runMiddleware(req, res, cors)
+    }
 
     // Validate method
     if (req.method !== method) {

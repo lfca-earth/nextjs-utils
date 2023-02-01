@@ -44,3 +44,19 @@ export function getQuery(req: NextApiRequest | NextRequest) {
     return req.query
   }
 }
+
+export function runMiddleware(
+  req: NextApiRequest | NextRequest,
+  res: NextApiResponse | NextResponse,
+  fn: Function
+) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: any) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+
+      return resolve(result)
+    })
+  })
+}

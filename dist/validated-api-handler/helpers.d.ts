@@ -10,3 +10,4 @@ export declare function getJsonBody(req: NextApiRequest | NextRequest): Promise<
 export declare function getQuery(req: NextApiRequest | NextRequest): Partial<{
     [key: string]: string | string[];
 }>;
+export declare function runMiddleware(req: NextApiRequest | NextRequest, res: NextApiResponse | NextResponse, fn: Function): Promise<unknown>;
