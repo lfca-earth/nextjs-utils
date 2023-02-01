@@ -49,11 +49,9 @@ function getQuery(req) {
 }
 exports.getQuery = getQuery;
 function createCorsResponse(req, res) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const origin = getHeader(req, 'Origin');
+    const origin = getHeader(req, 'Origin') || '*';
     const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const header = getHeader(req, 'Access-Control-Request-Headers');
+    const header = getHeader(req, 'Access-Control-Request-Headers') || 'Content-Type';
     if (isEdgeRequest(req)) {
         const headers = new Headers();
         // Allow any origin
