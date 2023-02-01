@@ -3,11 +3,11 @@ import { assert, Struct } from 'superstruct'
 
 import { createLogger, Logger } from '../logger'
 import {
+  createCorsResponse,
   createJsonResponse,
   getHeader,
   getJsonBody,
   getQuery,
-  createCorsResponse,
 } from './helpers'
 import {
   RequestTypes,
@@ -48,7 +48,6 @@ export const validatedApiHandler =
   ): Promise<NextResponse | Response | void> => {
     const logger = createLogger(req.url || 'unknown/path')
 
-    console.info('method', req.method)
     // Enable CORS if requested
     if (req.method === 'OPTIONS' && enableCors) {
       return createCorsResponse(req, res)

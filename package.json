@@ -18,9 +18,9 @@
     "next": ">= 13"
   },
   "devDependencies": {
-    "@lfca/eslint-config-lfca": "git+https://git@github.com/lfca-earth/eslint-config-lfca.git#423c245",
-    "@lfca/prettier-config": "git+https://git@github.com/lfca-earth/prettier-config-lfca.git#7908d2e",
-    "@lfca/ts-config": "git+https://git@github.com/lfca-earth/ts-config-lfca.git#c5fcc8d",
+    "@lfca/eslint-config": "git+https://git@github.com/lfca-earth/eslint-config-lfca.git#df6a413",
+    "@lfca/prettier-config": "git+https://git@github.com/lfca-earth/prettier-config-lfca.git#fc6d3a0",
+    "@lfca/ts-config": "git+https://git@github.com/lfca-earth/ts-config-lfca.git#9f52e58",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "eslint": "8.33.0",

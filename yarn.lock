@@ -36,9 +36,9 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@lfca/eslint-config-lfca@git+https://git@github.com/lfca-earth/eslint-config-lfca.git#423c245":
+"@lfca/eslint-config@git+https://git@github.com/lfca-earth/eslint-config-lfca.git#df6a413":
   version "1.0.0"
-  resolved "git+https://git@github.com/lfca-earth/eslint-config-lfca.git#423c245eb348668e08d6d9bae9240eec2ab356e7"
+  resolved "git+https://git@github.com/lfca-earth/eslint-config-lfca.git#df6a413fc720a56f418ecdccc443be3bc1f06b14"
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.48.2"
     "@typescript-eslint/parser" "5.48.2"
@@ -47,13 +47,13 @@
     eslint-plugin-simple-import-sort "10.0.0"
     eslint-plugin-sort-destructure-keys "1.4.0"
 
-"@lfca/prettier-config@git+https://git@github.com/lfca-earth/prettier-config-lfca.git#7908d2e":
+"@lfca/prettier-config@git+https://git@github.com/lfca-earth/prettier-config-lfca.git#fc6d3a0":
   version "1.0.0"
-  resolved "git+https://git@github.com/lfca-earth/prettier-config-lfca.git#7908d2e5c98bbd504ad6edae79c3eba640113b9f"
+  resolved "git+https://git@github.com/lfca-earth/prettier-config-lfca.git#fc6d3a07490226f43bbefbb3c043dce0388bde62"
 
-"@lfca/ts-config@git+https://git@github.com/lfca-earth/ts-config-lfca.git#c5fcc8d":
+"@lfca/ts-config@git+https://git@github.com/lfca-earth/ts-config-lfca.git#9f52e58":
   version "1.0.0"
-  resolved "git+https://git@github.com/lfca-earth/ts-config-lfca.git#c5fcc8dbce9dccece1a4fc99012201892754fb41"
+  resolved "git+https://git@github.com/lfca-earth/ts-config-lfca.git#9f52e58a27b3a81dba677c44768f2a1108b845c3"
   dependencies:
     "@tsconfig/next" "1.0.5"
     "@tsconfig/node16" "1.0.3"

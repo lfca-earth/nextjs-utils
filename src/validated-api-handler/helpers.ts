@@ -51,21 +51,24 @@ export function createCorsResponse(
 ) {
   const origin = '*'
   const methods = 'GET,HEAD,PUT,PATCH,POST,DELETE'
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const header = getHeader(req, 'Access-Control-Request-Headers')!
 
   if (isEdgeRequest(req)) {
-    console.log('edge request')
     const headers = new Headers()
 
     // Allow any origin
     headers.set('Access-Control-Allow-Origin', origin)
     headers.set('Access-Control-Allow-Methods', methods)
+    headers.set('Access-Control-Allow-Headers', header)
 
-    return new Response(null, { status: 204, headers })
+    return new Response(null, { headers, status: 204 })
   } else {
     return (res as NextApiResponse)
       .status(204)
       .setHeader('Access-Control-Allow-Origin', origin)
       .setHeader('Access-Control-Allow-Methods', methods)
+      .setHeader('Access-Control-Allow-Headers', header)
       .send(null)
   }
 }
