@@ -106,7 +106,14 @@ export const validatedApiHandler =
         corsHeaders
       )
     } catch (e) {
-      logger.error(`Invalid input: ${JSON.stringify(req.body || {})}`, e)
+      logger.error(
+        `Invalid input with \nbody: ${JSON.stringify(
+          getJsonBody(req) || {},
+          null,
+          2
+        )} \nreq: ${req}`,
+        e
+      )
       return createJsonResponse(res, {
         json: { message: ValidationError.BAD_REQUEST },
         status: 400,
