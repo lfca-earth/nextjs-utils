@@ -6,6 +6,7 @@ import { createLogger, Logger } from '../logger'
 import {
   createJsonResponse,
   createSetCorsHeaders,
+  getAllHeaders,
   getHeader,
   getJsonBody,
   getQuery,
@@ -107,11 +108,10 @@ export const validatedApiHandler =
       )
     } catch (e) {
       logger.error(
-        `Invalid input with \nbody: ${JSON.stringify(
-          getJsonBody(req) || {},
-          null,
-          2
-        )} \nreq: ${req}`,
+        `Invalid input
+        \nbody: ${JSON.stringify(getJsonBody(req), null, 2)}
+        \nheaders: ${JSON.stringify(getAllHeaders(req), null, 2)}
+        \nerror:\n`,
         e
       )
       return createJsonResponse(res, {

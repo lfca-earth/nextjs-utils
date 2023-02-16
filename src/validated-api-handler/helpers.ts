@@ -26,6 +26,17 @@ export function createJsonResponse(
   })
 }
 
+export function getAllHeaders(req: NextApiRequest | NextRequest) {
+  const value = isEdgeRequest(req)
+    ? [...req.headers.entries()].reduce((acc, curr) => {
+        acc[curr[0]] = curr[1]
+        return acc
+      }, {} as Record<string, string>)
+    : req.headers
+
+  return value || {}
+}
+
 export function getHeader(req: NextApiRequest | NextRequest, name: string) {
   const value = isEdgeRequest(req)
     ? req.headers.get(name)
@@ -35,7 +46,10 @@ export function getHeader(req: NextApiRequest | NextRequest, name: string) {
 }
 
 export async function getJsonBody(req: NextApiRequest | NextRequest) {
-  return isEdgeRequest(req) ? await req.json() : req.body
+  const requestsWithoutBody = ['GET', 'HEAD', 'OPTIONS']
+  if (req.method && requestsWithoutBody.includes(req.method)) return {}
+
+  return isEdgeRequest(req) ? (await req.json()) || {} : req.body || {}
 }
 
 export function getQuery(req: NextApiRequest | NextRequest) {

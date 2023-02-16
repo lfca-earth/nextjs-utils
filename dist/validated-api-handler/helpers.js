@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSetCorsHeaders = exports.getQuery = exports.getJsonBody = exports.getHeader = exports.createJsonResponse = exports.isEdgeRequest = void 0;
+exports.createSetCorsHeaders = exports.getQuery = exports.getJsonBody = exports.getHeader = exports.getAllHeaders = exports.createJsonResponse = exports.isEdgeRequest = void 0;
 const server_1 = require("next/server");
 function isEdgeRequest(req) {
     return !('query' in req);
@@ -24,6 +24,16 @@ function createJsonResponse(res, { json, status, }) {
     });
 }
 exports.createJsonResponse = createJsonResponse;
+function getAllHeaders(req) {
+    const value = isEdgeRequest(req)
+        ? [...req.headers.entries()].reduce((acc, curr) => {
+            acc[curr[0]] = curr[1];
+            return acc;
+        }, {})
+        : req.headers;
+    return value || {};
+}
+exports.getAllHeaders = getAllHeaders;
 function getHeader(req, name) {
     const value = isEdgeRequest(req)
         ? req.headers.get(name)
@@ -33,7 +43,10 @@ function getHeader(req, name) {
 exports.getHeader = getHeader;
 function getJsonBody(req) {
     return __awaiter(this, void 0, void 0, function* () {
-        return isEdgeRequest(req) ? yield req.json() : req.body;
+        const requestsWithoutBody = ['GET', 'HEAD', 'OPTIONS'];
+        if (req.method && requestsWithoutBody.includes(req.method))
+            return {};
+        return isEdgeRequest(req) ? (yield req.json()) || {} : req.body || {};
     });
 }
 exports.getJsonBody = getJsonBody;

@@ -63,7 +63,10 @@ const validatedApiHandler = (callback, { authenticated, bodySchema, enableCors, 
         }, corsHeaders);
     }
     catch (e) {
-        logger.error(`Invalid input with \nbody: ${JSON.stringify((0, helpers_1.getJsonBody)(req) || {}, null, 2)} \nreq: ${req}`, e);
+        logger.error(`Invalid input
+        \nbody: ${JSON.stringify((0, helpers_1.getJsonBody)(req), null, 2)}
+        \nheaders: ${JSON.stringify((0, helpers_1.getAllHeaders)(req), null, 2)}
+        \nerror:\n`, e);
         return (0, helpers_1.createJsonResponse)(res, {
             json: { message: types_1.ValidationError.BAD_REQUEST },
             status: 400,
