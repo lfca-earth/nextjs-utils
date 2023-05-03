@@ -29,7 +29,7 @@ const validatedApiHandler = (callback, { authenticated, bodySchema, enableCors, 
         }
     }
     // Validate method
-    if (req.method !== method) {
+    if (req.method !== 'HEAD' && req.method !== method) {
         logger.error(`Invalid method: ${req.method}`);
         return (0, helpers_1.createJsonResponse)(res, {
             json: { message: types_1.ValidationError.NOT_FOUND },
