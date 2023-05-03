@@ -64,7 +64,7 @@ export const validatedApiHandler =
     }
 
     // Validate method
-    if (req.method !== method) {
+    if (req.method !== 'HEAD' && req.method !== method) {
       logger.error(`Invalid method: ${req.method}`)
       return createJsonResponse(res, {
         json: { message: ValidationError.NOT_FOUND },
